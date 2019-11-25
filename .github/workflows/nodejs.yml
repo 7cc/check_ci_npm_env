@@ -8,7 +8,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        node-version: ['10.x', '12.x']
+        node-version: ['12.x']
         os: [ubuntu-latest, windows-latest, macOS-latest]
 
     steps:
@@ -18,9 +18,8 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
 
-    - name: Display the path
+    - name: Check prefix
       run: |
-        command -V nvm
         echo ${npm_config_prefix}
         npm config get pefix
         npm prefix -g
