@@ -18,11 +18,30 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
 
-    - name: Check prefix
+    - name: Check npm prefix
       run: |
         echo ${npm_config_prefix}
         npm config get pefix
         npm prefix -g
+        npm config delete pefix
+        npm prefix -g
+      shell: bash
+      env:
+        CI: true
+
+    - name: Check node and npm place
+      run: |
+        which node
+        which npm
+      shell: bash
+      env:
+        CI: true
+
+    - name: Check node process.env
+      run: |
+        node -pe process.execPath
+        node -pe process.env
+        node -pe process.env.npm_config_prefix
       shell: bash
       env:
         CI: true
