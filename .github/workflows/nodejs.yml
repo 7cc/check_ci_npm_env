@@ -18,10 +18,20 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
 
-    - name: Check letter
+    - name: First check
       run: |
         echo ${NPM_CONFIG_PREFIX}
-        echo ${npm_config_prefix}
+        npm prefix -g
+        node -pe process.env.npm_config_prefix
+      shell: bash
+      env:
+        CI: true
+
+    - name: tye unset npm_config_prefix
+      run: |
+        unset NPM_CONFIG_PREFIX
+        echo ${NPM_CONFIG_PREFIX}
+        npm prefix -g
         node -pe process.env.npm_config_prefix
       shell: bash
       env:
